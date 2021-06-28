@@ -5,7 +5,7 @@ import com.wagg.inventory.repository.entity.ProductEntity;
 
 public interface ProductMapper {
 	
-	public ProductEntity dtoToEntity(ProductDto dto);
-	public ProductDto entityToDto(ProductEntity entity);
+	public ProductEntity dtoToEntity(ProductDto dto) throws IllegalArgumentException;
+	public ProductDto entityToDto(ProductEntity entity) throws NullPointerException;
 
 }
