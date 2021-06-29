@@ -9,5 +9,6 @@ import com.wagg.inventory.dto.ProductDto;
 public interface ProductService {
 	
 	public ResponseEntity<List<ProductDto>> getAll();
+	public ResponseEntity<String> save(ProductDto dto);
 
 }

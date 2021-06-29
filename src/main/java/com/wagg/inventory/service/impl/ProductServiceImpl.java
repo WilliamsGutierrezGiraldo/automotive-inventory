@@ -39,4 +39,15 @@ public class ProductServiceImpl implements ProductService {
 		return ResponseEntity.status(HttpStatus.OK).body(dtos);
 	}
 
+	@Override
+	public ResponseEntity<String> save(ProductDto dto) {
+		try {
+			ProductEntity entity = productMapper.dtoToEntity(dto);
+			productRepository.save(entity);
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+		return ResponseEntity.status(HttpStatus.CREATED).body("created");
+	}
+
 }

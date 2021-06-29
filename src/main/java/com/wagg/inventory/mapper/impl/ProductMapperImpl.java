@@ -26,19 +26,19 @@ public class ProductMapperImpl implements ProductMapper {
 			if (dto.getId() != null) {
 				entity.setId(dto.getId());
 				entity.setEditionDate(LocalDate.now());
-				Optional<UserEntity> op = userRepository.findById(dto.getEditorUser()); 
-				entity.setEditorUser(op.isPresent() ? op.get() : null);
+				entity.setEditorUser(getUser(dto.getEditorUser()));
 				entity.setRegistrationDate(dto.getRegistrationDate());
 				entity.setEditionDate(LocalDate.now());
 			} else {
 				// the product is to be created
 				entity.setRegistrationDate(LocalDate.now());
-				entity.setRegisterUser(null);
 			}
 			entity.setName(dto.getName());
 			entity.setStock(dto.getStock());
+			entity.setRegisterUser(getUser(dto.getRegisterUser()));
 			
 		} catch (IllegalArgumentException ex) {
+			ex.printStackTrace();
 			throw new IllegalArgumentException("user not found");
 		}
 		
@@ -64,6 +64,11 @@ public class ProductMapperImpl implements ProductMapper {
 		}
 		
 		return dto;
+	}
+	
+	private UserEntity getUser(Long id) {
+		Optional<UserEntity> op = userRepository.findById(id);
+		return op.isPresent() ? op.get() : null;
 	}
 
 }
