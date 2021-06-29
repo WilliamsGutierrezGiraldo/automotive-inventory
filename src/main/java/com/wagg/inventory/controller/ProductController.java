@@ -16,7 +16,7 @@ import com.wagg.inventory.service.ProductService;
 
 @RestController
 @RequestMapping(path = "/products")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductController {
 	
 	@Autowired

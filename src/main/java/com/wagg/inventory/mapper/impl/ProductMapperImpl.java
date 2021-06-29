@@ -66,8 +66,14 @@ public class ProductMapperImpl implements ProductMapper {
 		return dto;
 	}
 	
-	private UserEntity getUser(Long id) {
-		Optional<UserEntity> op = userRepository.findById(id);
+	private UserEntity getUser(Long id) { 
+		Optional<UserEntity> op = null;
+		try {
+			op = userRepository.findById(id);
+		} catch (IllegalArgumentException ex) {
+			ex.printStackTrace();
+			throw new IllegalArgumentException("user not found");
+		}
 		return op.isPresent() ? op.get() : null;
 	}
 
